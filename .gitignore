@@ -1,0 +1,55 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Test binary, build folder, or executable
+build/
+*.exe
+*.out
+*.app
+*.o
+*.a
+*.swp
+*.cgo
+
+# Vendor directory
+/vendor/
+vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Configuration files
+.env
+
+# Logs
+*.log
+
+# IDE/editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Dependency directories
+node_modules/
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+eggs/
+parts/
+sdist/
+wheels/
+__pycache__/
