@@ -53,3 +53,4 @@ parts/
 sdist/
 wheels/
 __pycache__/
+*.db
