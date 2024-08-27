@@ -1,10 +1,19 @@
 package handler
 
 import (
-    "fmt"
-    "net/http"
+	"html/template"
+	"log"
+	"net/http"
 )
 
 func ScheduleHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Welcome to Schedulo scheduling system!")
+    tmpl, err := template.ParseFiles("web/templates/index.html")
+    if err != nil {
+        log.Fatalf("Error Loading template: %v", err)
+    }
+
+    err = tmpl.Execute(w, nil)
+    if err != nil {
+        log.Fatalf("Error executing template: %v", err)
+    }
 }
