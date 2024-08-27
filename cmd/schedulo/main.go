@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/TgkCapture/Schedulo/db"
 	"github.com/TgkCapture/Schedulo/api/handler"
 	"github.com/TgkCapture/Schedulo/config"
 )
@@ -11,8 +12,19 @@ import (
 func main() {
 	config.LoadConfig()
 
+	err := db.InitDB()
+	if err != nil {
+		log.Fatalf("Could not initialize the databe: %v\n", err)
+	}
+	defer db.CloseDB()
+
+	err = db.CreateTables()
+	if err != nil {
+		log.Fatalf("Could not create tables: %v\n", err)
+	}
+
 	http.HandleFunc("/", handler.ScheduleHandler)
 
-	log.Println("Starting Schedulo Server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Printf("Starting ScheduloGo server on :%s\n", config.Cfg.ServerPort)
+	log.Fatal(http.ListenAndServe(":"+config.Cfg.ServerPort, nil))
 }
