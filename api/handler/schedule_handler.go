@@ -49,8 +49,17 @@ func GetSchedulesHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(schedules)
+    tmpl, err := template.ParseFiles("web/templates/schedules.html")
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    w.Header().Set("Content-Type", "text/html")
+    err = tmpl.Execute(w, schedules)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+    }
 }
 
 // DeleteScheduleHandler handles deleting a schedule by ID.
