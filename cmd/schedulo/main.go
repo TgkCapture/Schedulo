@@ -29,7 +29,10 @@ func main() {
 	r.HandleFunc("/", handler.ScheduleHandler).Methods("GET")
 	r.HandleFunc("/schedules", handler.AddScheduleHandler).Methods("POST")
 	r.HandleFunc("/schedules", handler.GetSchedulesHandler).Methods("GET")
-    r.HandleFunc("/schedules/{id}", handler.DeleteScheduleHandler).Methods("DELETE")
+	r.HandleFunc("/schedules/{id}", handler.DeleteScheduleHandler).Methods("DELETE")
+	r.HandleFunc("/add-schedule", handler.AddScheduleFormHandler).Methods("GET")
+	r.HandleFunc("/modify-schedule/{id}", handler.ModifyScheduleFormHandler).Methods("GET") 
+	r.HandleFunc("/delete-schedule/{id}", handler.DeleteScheduleFormHandler).Methods("GET")
 
 	log.Printf("Starting ScheduloGo server on :%s\n", config.Cfg.ServerPort)
 	log.Fatal(http.ListenAndServe(":"+config.Cfg.ServerPort, r))
