@@ -31,8 +31,6 @@ func main() {
 	r.HandleFunc("/schedules", handler.GetSchedulesHandler).Methods("GET")
     r.HandleFunc("/schedules/{id}", handler.DeleteScheduleHandler).Methods("DELETE")
 
-	http.HandleFunc("/", handler.ScheduleHandler)
-
 	log.Printf("Starting ScheduloGo server on :%s\n", config.Cfg.ServerPort)
-	log.Fatal(http.ListenAndServe(":"+config.Cfg.ServerPort, nil))
+	log.Fatal(http.ListenAndServe(":"+config.Cfg.ServerPort, r))
 }
