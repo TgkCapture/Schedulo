@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Schedule</title>
+</head>
+<body>
+    <h1>Delete Schedule</h1>
+    <form action="/schedules/{{.ID}}" method="post">
+        <p>Are you sure you want to delete the schedule "{{.Title}}"?</p>
+        <input type="submit" value="Delete Schedule">
+    </form>
+    <br>
+    <a href="/schedules">View All Schedules</a>
+</body>
+</html>

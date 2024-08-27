@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Schedule</title>
+</head>
+<body>
+    <h1>Modify Schedule</h1>
+    <form action="/schedules/{{.ID}}" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{.Title}}" required><br><br>
+        <label for="time_slot">Time Slot:</label>
+        <input type="text" id="time_slot" name="time_slot" value="{{.TimeSlot}}" required><br><br>
+        <label for="channel">Channel:</label>
+        <input type="text" id="channel" name="channel" value="{{.Channel}}" required><br><br>
+        <input type="submit" value="Update Schedule">
+    </form>
+    <br>
+    <a href="/schedules">View All Schedules</a>
+</body>
+</html>
