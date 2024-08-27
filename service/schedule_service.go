@@ -60,3 +60,14 @@ func DeleteSchedule(id int64) error {
     }
     return nil
 }
+
+// GetScheduleByID retrieves a schedule by its ID.
+func GetScheduleByID(id int64) (*models.Schedule, error) {
+    query := `SELECT id, title, time_slot, channel FROM schedules WHERE id = $1`
+    var schedule models.Schedule
+    err := db.DB.QueryRow(query, id).Scan(&schedule.ID, &schedule.Title, &schedule.TimeSlot, &schedule.Channel)
+    if err != nil {
+        return nil, fmt.Errorf("error retrieving schedule: %w", err)
+    }
+    return &schedule, nil
+}
