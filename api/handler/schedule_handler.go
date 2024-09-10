@@ -78,3 +78,31 @@ func DeleteScheduleHandler(w http.ResponseWriter, r *http.Request) {
 
     json.NewEncoder(w).Encode(map[string]string{"message": "Schedule deleted successfully"})
 }
+
+func UpdateScheduleHandler(w http.ResponseWriter, r *http.Request) {
+    vars := mux.Vars(r)
+    id, err := strconv.ParseInt(vars["id"], 10, 64)
+    if err != nil {
+        http.Error(w, "Invalid schedule ID", http.StatusBadRequest)
+        return
+    }
+
+    title := r.FormValue("title")
+    timeSlot := r.FormValue("time_slot")
+    channel := r.FormValue("channel")
+
+    updatedSchedule := models.Schedule{
+        ID:       id,
+        Title:    title,
+        TimeSlot: timeSlot,
+        Channel:  channel,
+    }
+
+    err = service.UpdateSchedule(updatedSchedule)
+    if err != nil {
+        http.Error(w, "Failed to update schedule: "+err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    http.Redirect(w, r, "/schedules", http.StatusSeeOther)
+}
